@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="display: block;margin-top:4%;width: 60%;float: left;">{{"Profile" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <div *ngIf="userId.length > 0">
+    <ion-card>
+      <div style="background:url('assets/Profile/Prof.jpg');height: 200px;background-size: cover;"><br />
+         <ion-icon class="editIcon" *ngIf="!IsViewOtherProfile" (click)="EditProfile($event)" name="ios-create"></ion-icon>
+
+        <!--<i *ngIf="!IsViewOtherProfile" (click)="EditProfile($event)"  class="brush" aria-hidden="true"></i>-->
+        <img class="ProfileImage" src="{{s3BaseURL+userId+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+      </div>
+    </ion-card>
+    
+    <div style="margin-top: 51px;">
+      <div style="text-align: center;font-size: large;color:black;">{{profileInfo.Name}}</div>
+      <div style="text-align: center;color:grey;font-style: italic;">{{profileInfo.JobDescription}}</div>
+      <div *ngIf="IsViewOtherProfile" style="text-align: center">
+        <button *ngIf="!profileInfo.IsFollowed" (click) = "FollowUser()" ion-button outline   round> {{"Follow" | translate}}</button>
+        <button *ngIf="profileInfo.IsFollowed" ion-button outline   round>Following</button>
+        <!--<button (click)="MyRecipiesList($event, 'item')" class="btnRecipe">{{"Recipe List" | translate}}</button>-->
+      </div>
+      <ion-segment class="seg" color="danger">
+        <ion-segment-button (click)="MyRecipiesList($event, 'item')" class="recipeSegment" value="standard">
+          <div class="tileWhite" style="height: 63px;font-size: -webkit-xxx-large;margin-top: 15px;">{{profileInfo.UserRecipies}} </div>
+          <div class="tileWhite" style="margin-top: -20px;">{{"Recipes" | translate}}</div> 
+        </ion-segment-button>
+        <ion-segment-button (click)="ViewFollowers()" class="followersSegment" value="hybrid">
+          <div class="tileWhite" style="height: 63px;font-size: -webkit-xxx-large;margin-top: 15px;">{{profileInfo.Followers}}  </div>
+          <div class="tileWhite" style="margin-top: -20px;">{{"Followers" | translate}}</div> 
+        </ion-segment-button>
+        <ion-segment-button (click)="ViewFollowing()" class="followingSegment" value="sat">
+          <div class="tileWhite" style="height: 63px;font-size: -webkit-xxx-large;margin-top: 15px;">{{profileInfo.Following}} </div>
+          <div  class="tileWhite" style="margin-top: -20px;"> {{"Following" | translate}}</div> 
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </div>
+</ion-content>

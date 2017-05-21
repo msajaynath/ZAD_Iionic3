@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"My Cookbook" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf= "ACookBookImage.length > 0">
+    <ion-card (click)="CookBookClicked($event, item)" class="cookBook-background-page" *ngFor="let item of CookBookList">
+      <img style="height: 125px;" src="{{item.ImageUrl}}">
+      <div class="CookBook-title">{{item.CookBookNameEn}}</div>
+      <div class="cookBook-subtitle">{{item.RecipeId.length}}</div>
+    </ion-card>
+  </div>
+</ion-content>

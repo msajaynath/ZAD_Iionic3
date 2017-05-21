@@ -1,0 +1,71 @@
+
+.circleadddd
+{
+  float:right; 
+}
+
+
+ion-scroll {
+    white-space: nowrap;
+    height: 50px;
+}
+
+.img-wrap {
+position: relative;
+float:left;
+}
+
+ .clearButton {
+
+   color:darksalmon;
+position: absolute;
+top: 0px;
+right: 0px;
+z-index: 100;
+
+}
+
+.clearVideoButton {
+
+   color:darksalmon;
+position: absolute;
+top: 0px;
+right: 0px;
+z-index: 100;
+
+}
+.editIcon{
+    font-size: 40px;
+    margin-left: 86%;
+    margin-top: 145px;
+
+    color: white;
+    position: absolute;
+        display: block;
+
+}
+
+ .primaryButton {
+
+   color: white;
+
+   
+position: absolute;
+bottom: 0;
+left: 0;
+
+}
+
+.primaryCheck
+{
+  color:orange;
+}
+
+.segmentCustom
+{
+  height:auto;
+}
+.labelCustom{
+  display: block;
+  font-size:xx-small;
+}

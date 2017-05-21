@@ -1,0 +1,28 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <div class="mainMenue">
+        <img src="assets/MainMenuImage/Image.jpg">
+        <div class="menuTitle">      
+          <Span class="menuFont" style="margin-right: 20px;font-size: 30px;">{{"Menu" | translate}}</Span>
+        </div>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button class="home" menuClose ion-item (click)="openPage(p)" *ngFor="let p of pages
+        let index =index; let odd=odd; let even=even" 
+      [class.odd]="odd" 
+      [class.even]="even">
+      <span><ion-icon name="{{p.icon}}"></ion-icon></span>
+        {{p.title | translate}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

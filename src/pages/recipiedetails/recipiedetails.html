@@ -1,0 +1,202 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Recipe Details" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="primaryImage.length > 0">
+    <div class="card-background-page">
+      <img style="width: 100%;height: 210px;" src={{primaryImage}}/>
+      <div class="RatingText">
+        <div style="float:right;display: block;height: 5%">
+          <rating style="color: #ffb400;height: 5%" [(ngModel)]=reviewRating readOnly="false" max="5"></rating>
+        </div>
+      </div>
+      <div class="card-Ingerigent-Text">
+        <div style="width: 80%;" class="RecipieDetailsText">
+          <div style="font-size: 17px;">{{recipieDetails.RecipeName}}</div>
+          <ion-label style="margin: 0px; font-style: italic;color: gold;">{{recipieDetails.RecipeDescription}}</ion-label>
+        </div>
+        <div (click)="RecipieOwnerClick($event, recipieDetails.MakerId)" style="width:20%;display: block;float:right">
+          <ion-avatar item-right style="margin-right: 33%">
+            <img class="item-profileRecipie" src="{{s3BaseURL+recipieDetails.MakerId+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+          </ion-avatar>
+          <div style="text-align: center;color: white">{{recipieDetails.MakerName}}</div>
+        </div>
+      </div>
+    </div>
+
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+        <ion-segment-button value="first" style="height:auto">
+          <ion-icon name="clipboard"></ion-icon>
+          <label class="labelCustom">Incredients</label>
+        </ion-segment-button>
+        <ion-segment-button value="second" style="height:auto">
+          <ion-icon name="ios-flame"></ion-icon>
+          <label class="labelCustom">Directions</label>
+        </ion-segment-button>
+        <ion-segment-button value="third" style="height:auto">
+          <ion-icon name="pricetags"></ion-icon>
+          <label class="labelCustom">Reviews</label>
+        </ion-segment-button>
+        <ion-segment-button value="forth" style="height:auto">
+          <ion-icon name="images"></ion-icon>
+          <label class="labelCustom">Gallery</label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <ion-slides style="height: auto;" #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+      <ion-slide>
+        <ion-list no-lines>
+          <ion-item *ngFor="let item of recipieDetails.Ingredents let index =index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even">
+            <ion-icon *ngIf="!item.isAddedInShoppingCart" (click)="ingredentSelected(item)" name="basket" style="color: lawngreen"></ion-icon>
+            <ion-icon *ngIf="item.isAddedInShoppingCart" name="remove-circle" style="color: saddlebrown"></ion-icon>
+            <span> {{ item.Name }}</span>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list no-lines>
+          <div>
+            <div *ngFor="let item of directions let index =index;">
+              <ion-item style="background-color: beige">{{"Step" | translate}} {{index + 1}}</ion-item>
+              <ion-item text-wrap *ngFor="let dir of item.subDirection let i =index; 
+                let odd=odd; 
+                let even=even" [class.odd]="odd" [class.even]="even">
+                <ion-icon name="checkmark"></ion-icon> {{dir.Text}}
+                </ion-item>
+            </div>
+          </div>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <div *ngIf="this.IsAddNewReview" class="odd" style="padding: 3%;">
+          <ion-item no-lines style="background-color: darkseagreen;">
+            <span style="text-align: center;display: block"> {{"TapText" | translate}}</span>
+
+            <rating [(ngModel)]="addReview.ReviewRating" style="color: #ffb400;height: 5%;display: block;text-align: center;margin-right: 10%;"
+              readOnly="false" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"></rating>
+          </ion-item>
+          <ion-item no-lines>
+            <ion-label floating>{{"Comments" | translate}}</ion-label>
+            <ion-textarea [(ngModel)]="addReview.ReviewDescription" type="text"></ion-textarea>
+          </ion-item>
+          <button (click)='SaveReviewDetails()' ion-button full>{{"Save Review" | translate}}</button>
+        </div>
+        <!--recipieDetails.Reviews.length == 0-->
+        <div *ngIf="!this.IsAddNewReview && ReviewList.length == 0" class="odd" style="padding: 3%;">
+          <ion-label style="text-align: center">{{"No Reviews Yet" | translate}}</ion-label>
+          <ion-label style="text-align: center">{{"ReviewSubText" | translate}}</ion-label>
+          <button (click)='AddNewReview()' ion-button full>{{"Add Review" | translate}}</button>
+        </div>
+        <ion-item *ngIf="!IsAddNewReview && ReviewList.length > 0" no-lines style="padding: 2%;background: khaki;">
+          <label style="text-align: left; display: block; width: 85%; float: left;">Add Review</label>
+          <ion-icon style="display: block;float: right; " class="circleadddd" name="add-circle" (click)="AddNewReview()"></ion-icon>
+        </ion-item>  
+        <ion-list *ngFor="let item of ReviewList" class="even">
+          <ion-list-header class="even">
+            <ion-avatar item-left>
+              <img src="{{s3BaseURL+item.ReviewerId+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+            </ion-avatar>
+            <div style="float: left; width:40%;text-align: left;">
+              <span>{{item.ReviewerName}}</span>
+              <p>{{item.ReviewedDate | amTimeAgo}}</p>
+            </div>
+            <div style="float: right">
+              <rating style="color: #ffb400;height: 5%" [(ngModel)]=item.ReviewRating readOnly="true" max="5"></rating>
+            </div>
+          </ion-list-header>
+          <ion-item text-wrap class="odd">
+            {{item.ReviewDescription}}
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list no-lines>
+          <ion-item>
+            <ion-label class="ListHeading">{{"Photos" | translate}}({{recipieDetails.Images.length}})</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-item class="AddAllIngredent">
+          <ion-scroll scrollX="true" class="item">
+            <ion-row>
+              <ion-col *ngFor="let item of recipieDetails.Images" width-33>
+                <ion-card>
+                  <ion-card-content style="padding: 4px;">
+                    <img src={{item.URL}} imageViewer />
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-scroll>
+        </ion-item>
+        <ion-list no-lines *ngIf="recipieDetails.Videos!=undefined && recipieDetails.Videos.length>0">
+          <ion-item>
+            <ion-label class="ListHeading">{{"Videos" | translate}}({{recipieDetails.Videos.length}})</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-card style="width: 100%;margin:0" class="AddAllIngredent" *ngIf="recipieDetails.Videos!=undefined && recipieDetails.Videos.length>0">
+          <ion-card-content>
+            <ion-scroll scrollX="true" style="white-space: nowrap;height: 180px">
+              <ion-label *ngIf="recipieDetails.Videos.length==0">{{"NoVideos" | translate}} </ion-label>
+              <ion-row>
+                <ion-col *ngFor="let item of recipieDetails.Videos">
+                  <video width="250px" height="150px" controls>
+                    <source src={{item.URL}} type="{{item.Type}}">
+                  </video>
+                </ion-col>
+              </ion-row>
+            </ion-scroll>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label class="ListHeading">{{"Recipe Tags" | translate}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list style="padding: 5%" no-lines class="AddAllIngredent">
+      <ion-chip>
+        <ion-avatar>
+              <ion-icon name="bookmarks" ></ion-icon>
+        </ion-avatar>
+        <ion-label>{{recipieDetails.Category}}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-avatar>
+              <ion-icon name="bowtie" ></ion-icon>
+        </ion-avatar>
+        <ion-label>{{recipieDetails.Cusine}}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-avatar>
+              <ion-icon name="bonfire" ></ion-icon>
+        </ion-avatar>
+        <ion-label>{{recipieDetails.CookingType}}</ion-label>
+      </ion-chip>
+    </ion-list>
+  </div>
+</ion-content>
+
+<style>
+  .swiper-slide {
+    overflow: scroll;
+    width: 100%;
+    height: 250px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 18px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: block;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+</style>

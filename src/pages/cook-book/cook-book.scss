@@ -1,0 +1,34 @@
+.cookBook-background-page {
+    position: relative;
+    text-align: center;
+}
+
+  .CookBook-title {
+    position: absolute;
+    top: 59%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .cookBook-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 86%;
+    width: 100%;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .Category-title{
+    position: absolute;
+    top: 74%;
+    font-size: 2.0em;
+    width: 83%;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.35);
+  }
+

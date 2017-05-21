@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"Create Recipe" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background-color: oldlace">
+  <div style="padding: 3%" *ngIf="resultText.length > 0">
+    <ion-item>
+      <ion-input [(ngModel)]="createRecipie.RecipeName" placeholder="Recipe Name" clearInput></ion-input>
+    </ion-item>
+    <ion-item style="margin-top: 10px;">
+      <ion-input [(ngModel)]="createRecipie.RecipeDescription" placeholder="Recipe Description" clearInput></ion-input>
+    </ion-item>
+    <ion-card style="height: auto; width: 100%;margin: 10px 10px 10px 0px;">
+
+    </ion-card>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+        <ion-segment-button value="first" style="height:auto">
+          <ion-icon name="clipboard"></ion-icon>
+          <label class="labelCustom">Incredients</label>
+        </ion-segment-button>
+        <ion-segment-button value="second" style="height:auto">
+          <ion-icon name="ios-flame"></ion-icon>
+          <label class="labelCustom">Directions</label>
+        </ion-segment-button>
+        <ion-segment-button value="third" style="height:auto">
+          <ion-icon name="pricetags"></ion-icon>
+          <label class="labelCustom">Tags</label>
+        </ion-segment-button>
+        <ion-segment-button value="forth" style="height:auto">
+          <ion-icon name="images"></ion-icon>
+          <label class="labelCustom">Gallery</label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <ion-slides style="height: auto;" #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+      <ion-slide>
+        <ion-item no-lines style="padding: 2%;background: khaki;">
+          <label style="text-align: left; display: block; width: 85%; float: left;">Add more ingredents</label>
+          <ion-icon style="display: block;float: right; " class="circleadddd" name="add-circle" (click)="AddIngredents()"></ion-icon>
+        </ion-item>
+        <ion-list>
+          <ion-label *ngIf="Ingredents.length==0">{{"No Ingredents" | translate}}</ion-label>
+          <ion-item style="margin-bottom: 4%;" *ngFor="let item of Ingredents;let i = index; ">
+            <ion-label floating>{{"Ingredient" | translate}} - {{i +1 }}</ion-label>
+            <ion-input style="padding-bottom: 25px" (tap)="AddMore(i, 'ingredent')" [(ngModel)]="item.ingredent" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-item no-lines style="padding: 2%;background: khaki;">
+          <label style="text-align: left; display: block; width: 85%; float: left;">Add more Directions</label>
+          <ion-icon style="display: block;float: right; width: 15%;" class="circleadddd" name="add-circle" (click)="AddMoreSteps()"></ion-icon>
+        </ion-item>
+        <ion-list>
+          <ion-label *ngIf="Directions.length==0">{{"No Directions" | translate}}</ion-label>
+          <ion-item style="margin-bottom: 1%;" *ngFor="let item of Directions;let i = index; ">
+            <ion-label floating>{{"Step" | translate}} - {{i +1 }}</ion-label>
+            <ion-textarea style="padding-bottom: 25px" (tap)="AddMore(i, 'direction')" [(ngModel)]="item.direction" type="text"></ion-textarea>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-item no-lines style="padding: 2%;background: khaki;">
+          <label text-wrap style="text-align: left; display: block; width: 100%; float: left;">{{"Recipie Text" | translate}}</label>
+        </ion-item>
+        <ion-item style="margin-bottom: 1%;">
+          <ion-label>{{"Categories" | translate}}</ion-label>
+          <ion-select [(ngModel)]="createRecipie.Category" cancelText="Cancel" okText="Okay!">
+            <ion-option *ngFor="let item of LookUp[0].CategoryTag" value={{item._id}}>
+              <span *ngIf="currentLanguage == 'ar'">{{item.CategoryNameAr}}</span>
+              <span *ngIf="currentLanguage == 'en'">{{item.CategoryNameEn}}</span>
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item style="margin-bottom: 1%;">
+          <ion-label>{{"Cooking type" | translate}}</ion-label>
+          <ion-select [(ngModel)]="createRecipie.CookingType" cancelText="Cancel" okText="Okay!">
+            <ion-option *ngFor="let item of LookUp[0].CookingTypeTag" value={{item._id}}>
+              <span *ngIf="currentLanguage == 'ar'">{{item.CookingTypeNameAr}}</span>
+              <span *ngIf="currentLanguage == 'en'">{{item.CookingTypeNameEn}}</span>
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item style="margin-bottom: 1%;">
+          <ion-label>{{"Cusine" | translate}}</ion-label>
+          <ion-select [(ngModel)]="createRecipie.Cusine" cancelText="Cancel" okText="Okay!">
+            <ion-option *ngFor="let item of LookUp[0].CusineTag" value={{item._id}}>
+              <span *ngIf="currentLanguage == 'ar'">{{item.CusineNameAr}}</span>
+              <span *ngIf="currentLanguage == 'en'">{{item.CusineNameEn}}</span>
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item style="margin-bottom: 1%;">
+          <ion-label>{{"Time To Cook" | translate}}</ion-label>
+          <ion-select [(ngModel)]="createRecipie.Time" cancelText="Cancel" okText="Okay!">
+            <ion-option *ngFor="let item of LookUp[0].Time" value={{item._id}}>
+              <span *ngIf="currentLanguage == 'ar'">{{item.CookingTimeAr}}</span>
+              <span *ngIf="currentLanguage == 'en'">{{item.CookingTimeEn}}</span>
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{"Calories" | translate}}</ion-label>
+          <ion-select [(ngModel)]="createRecipie.Calories" cancelText="Cancel" okText="Okay!">
+            <ion-option *ngFor="let item of LookUp[0].Calories" value={{item._id}}>
+              <span *ngIf="currentLanguage == 'ar'">{{item.CaloriesNameAr}}</span>
+              <span *ngIf="currentLanguage == 'en'">{{item.CaloriesNameEn}}</span>
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-slide>
+      <ion-slide>
+        
+        <ion-card style="margin: 10px 10px 10px 0px;width: 100%">
+          <ion-card-header style="background-color:khaki">{{"Photos" | translate}}
+            <ion-icon class="circleadddd" *ngIf="imageProgress==false" name="add-circle" (click)="presentActionSheet()"></ion-icon>
+            <ion-icon class="circleadddd fa fa-spinner fa-spin" *ngIf="imageProgress==true"></ion-icon>
+            <!--<div class="fa fa-spinner fa-spin"></div>-->
+
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label *ngIf="createRecipie.Images.length==0">{{"No Photos" | translate}} </ion-label>
+            <ion-row wrap>
+              <ion-col *ngFor="let item of createRecipie.Images ; let i = index" width-50 height-50>
+                <div class="img-wrap">
+
+                  <i class="clearButton fa fa-times-circle fa-2x" *ngIf="item.Order!=0" aria-hidden="true" (click)="deleteImage(item)"></i>
+                  <i class="primaryButton fa fa-check-circle fa-2x primaryCheck" aria-hidden="true" *ngIf="item.Order==0"></i>
+                  <i class="primaryButton fa fa-check-circle fa-2x" aria-hidden="true" *ngIf="item.Order>0" (click)="changePrimary(item)"></i>
+                  <img src={{item.URL}} imageViewer />
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-card style="margin: 0px 5px 10px 1px;width: 100%">
+          <ion-card-header style="background-color:khaki">{{"Videos" | translate}}
+            <ion-icon class="circleadddd" name="add-circle" *ngIf="videoProgress==false" (click)="presentVideoActionSheet()"></ion-icon>
+            <ion-icon class="circleadddd fa fa-spinner fa-spin" *ngIf="videoProgress==true"></ion-icon>
+
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label *ngIf="createRecipie.Videos.length==0">{{"NoVideos" | translate}} </ion-label>
+            <ion-row wrap>
+              <ion-col *ngFor="let item of createRecipie.Videos" width-50 height-80>
+                <div class="img-wrap">
+
+                  <i class="clearVideoButton fa fa-times-circle fa-2x" aria-hidden="true" (click)="deleteVideo(item)"></i>
+
+                  <video width="150px" height="150px" controls>
+                    <source src={{item.URL}} type="{{item.Type}}">
+                  </video>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+    <ion-item>
+          <button (click)='SaveRecipieDetails()' ion-button full>{{"Yummy" | translate}}</button>
+        
+    </ion-item>
+  </div>
+</ion-content>

@@ -1,0 +1,125 @@
+.borderLeft{
+    border-left: 1px solid lightgray;
+    text-align: center;
+}
+
+.borderRight{
+    border-right: 1px solid lightgray;
+}
+
+.borderTop{
+    border-top: 1px solid lightgray;
+    text-align: center;
+}
+
+.item-profile {
+  border-radius: 50%;
+  height: 110px;
+  width:110px !important;  
+  display: block;
+  margin: 0 auto;
+}
+
+.ProfileImage {
+    border-radius: 50%;
+    height: 110px;
+    width: 110px !important;
+    display: block;
+    /* margin: 0 auto; */
+    position: absolute;
+    margin-left: 32%;
+    /* margin-right: auto; */
+    margin-top: 125px;
+    border: 5px solid white;
+}
+.editIcon{
+    font-size: 40px;
+    margin-left: 86%;
+    margin-top: 145px;
+
+    color: white;
+    position: absolute;
+        display: block;
+
+}
+
+.btn {
+  background: #cb34d9;
+  background-image: -webkit-linear-gradient(top, #cb34d9, #2980b9);
+  background-image: -moz-linear-gradient(top, #cb34d9, #2980b9);
+  background-image: -ms-linear-gradient(top, #cb34d9, #2980b9);
+  background-image: -o-linear-gradient(top, #cb34d9, #2980b9);
+  background-image: linear-gradient(to bottom, #cb34d9, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  margin-left: 3%;
+  margin-top: 2%;
+  width: 92%;
+}
+
+.btnRecipe {
+  background: #ffffff;
+  background-image: -webkit-linear-gradient(top, #ffffff, #e0e0e0);
+  background-image: -moz-linear-gradient(top, #ffffff, #e0e0e0);
+  background-image: -ms-linear-gradient(top, #ffffff, #e0e0e0);
+  background-image: -o-linear-gradient(top, #ffffff, #e0e0e0);
+  background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #859c85;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+      margin-left: 16%;
+    margin-top: 8%;
+    width: 40%;
+}
+
+.recipeSegment{
+    height: 100px !important;
+     border-color: #d9ac37 !important;
+    background: #d9ac37 !important;
+}
+
+.followersSegment{
+    height: 100px !important;
+     border-color: #7fbb5c !important;
+    background: #7fbb5c !important;
+}
+.tileWhite
+{
+    color: white;
+    text-transform: uppercase; 
+    font-style: unset;
+}
+.followingSegment{
+    height: 100px !important;
+    border-color: #73aad6 !important;
+    background: #73aad6 !important;
+}
+
+.edit{
+    color: mistyrose;
+    font-size: 21px;
+    margin-left: 84%;
+    margin-top: 153px;
+    position: absolute;
+}
+.seg{
+    height: 100px;
+    margin-top: 21px;
+    background-color: white;
+    /* margin: 0%; */
+    margin-left: 2%;
+    /* margin-right: 0%; */
+    width: 96%;
+
+}

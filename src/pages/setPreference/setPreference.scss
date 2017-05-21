@@ -1,0 +1,114 @@
+@import url(http://fonts.googleapis.com/css?family=Sansita+One);
+
+#container {
+  background-color:#fff;
+}
+.textPreferWhite
+{
+  color: white;
+}
+.oddd {
+    background: #ebbe48;
+}
+.evenn {
+    background-color: #ebbe52;
+}
+.oddd2 {
+    background: #5c83f9;
+}
+.evenn2 {
+    background-color: #5c83f6;
+}
+.oddd3 {
+    background: #aa5378;
+}
+.evenn3 {
+    background-color: #aa5378;
+}
+.btnEnglish {
+  background: #d8a8f0;
+  background-image: -webkit-linear-gradient(top, #d8a8f0, #2980b9);
+  background-image: -moz-linear-gradient(top, #d8a8f0, #2980b9);
+  background-image: -ms-linear-gradient(top, #d8a8f0, #2980b9);
+  background-image: -o-linear-gradient(top, #d8a8f0, #2980b9);
+  background-image: linear-gradient(to bottom, #d8a8f0, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btnArabic {
+  background: #b6f0a8;
+  background-image: -webkit-linear-gradient(top, #b6f0a8, #2980b9);
+  background-image: -moz-linear-gradient(top, #b6f0a8, #2980b9);
+  background-image: -ms-linear-gradient(top, #b6f0a8, #2980b9);
+  background-image: -o-linear-gradient(top, #b6f0a8, #2980b9);
+  background-image: linear-gradient(to bottom, #b6f0a8, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.big-button {
+  position: relative;
+  background-color:#ccffcc;
+  color: #000000;
+  font-family: 'Sansita One', cursive;
+  font-size: 26px;
+  font-weight: 500;
+  
+  //margin: 10px auto;
+  padding: 20px;
+  height: 150px;
+  width: 270px;
+  text-decoration: none;
+  text-transform: capitalize;
+  
+  
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  
+  -webkit-box-shadow: 0px 15px 0px #009933, 0px 10px 25px rgba(0,0,0,.5);
+  -moz-box-shadow: 0px 15px 0px #009933, 0px 10px 25px rgba(0,0,0,.5);
+  box-shadow: 0px 15px 0px #009933, 0px 10px 25px rgba(0,0,0,.5);
+  
+  margin: 50px auto;
+  
+  border-color: #66ff66;
+  border-width: 10px;
+  border-radius: 40px 100px 100px 100px;
+  padding: 20px;
+}
+
+.big-button:active {
+  box-shadow: 0px 3px 0px #33CC33, 0px 3px 6px rgba(0,0,0,.9);
+  position: relative;
+  top: 10px;
+}
+
+.shadow {
+  background: #000;
+  border-radius: 40px 100px 100px 100px;
+  box-shadow: 0 0 20px 10px #111;
+  height: 120px;
+  width: 270px;
+  opacity: 0.2;
+  margin: 30px auto;
+}
+
+.shadow:active {
+  box-shadow: 0px 3px 0px #33CC33, 0px 3px 6px rgba(0,0,0,.9);
+  position: relative;
+  top: 10px;
+}

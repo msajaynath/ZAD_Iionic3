@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"Settings" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #f4f6f7;padding: 4%">
+  <div *ngIf = "resultText.length > 0">
+    <ion-card-header *ngIf = "IsLoggedIn" style="background-color: #e3e6ea;">
+      <span style="display: block;width: 20%;float: left">{{"Logout" | translate}}</span>
+       <ion-icon name="log-out" style="float: right" (click)="Logout()"></ion-icon>
+    </ion-card-header>
+    <ion-card-header *ngIf = "IsLoggedIn" style="background-color: white">
+        <span style="display: block;width: 20%;float: left">{{"Private" | translate}}</span>
+        <ion-toggle (ngModelChange) = "AssignPrivate($event)" [(ngModel)]="profileInfo.ISPrivate" style="float: right"></ion-toggle>
+    </ion-card-header>
+    <ion-card-header *ngIf = "IsLoggedIn" style="background-color: #e3e6ea">
+        {{"LanguagePreference" | translate}}
+    </ion-card-header>   
+    <ion-list *ngIf = "IsLoggedIn" style="margin: -1px 0 0px 0;">
+      <ion-item> 
+        <span (click)="changeLanguage('ar')"  style="margin-right: 20px; display: block; float: left;"><img src='assets/LanguageIcon/Arabic.jpg' style="height: 25px;width: 25px;"></span>
+        <span (click)="changeLanguage('en')"><img src='assets/LanguageIcon/English.png' style="height:25px;width: 25px;"></span>
+      </ion-item>
+    </ion-list>
+      
+    <ion-card-header style="background-color: #e3e6ea">
+      {{"SearchPreference" | translate}}
+    </ion-card-header> 
+    <ion-list no-lines >
+      <ion-item >   
+        <ion-label (click) = "ShowItems(1)"  *ngIf ="ShowItem == 1" class="ListHeading" style="font-size: large;color: blue;">{{"Categories" | translate}} |</ion-label> 
+        <ion-label (click) = "ShowItems(1)" *ngIf ="ShowItem != 1" class="ListHeading" >{{"Categories" | translate}} |</ion-label> 
+        <ion-label (click) = "ShowItems(2)" *ngIf ="ShowItem == 2" style="font-size: large;color: blue;" class="ListHeading">{{"Cooking Type" | translate}} |</ion-label>
+        <ion-label (click) = "ShowItems(2)" *ngIf ="ShowItem != 2"  class="ListHeading">{{"Cooking Type" | translate}} |</ion-label>
+        <ion-label (click) = "ShowItems(3)" *ngIf ="ShowItem == 3" style="font-size: large;color: blue;" class="ListHeading">{{"Cusine" | translate}}</ion-label>
+        <ion-label (click) = "ShowItems(3)"  *ngIf ="ShowItem != 3" class="ListHeading">{{"Cusine" | translate}} </ion-label>
+      </ion-item>
+    </ion-list> 
+    <ion-list no-lines *ngIf ="ShowItem == 1"> 
+      <ion-list>
+        <ion-item *ngFor="let item of LookUp[0].CategoryTag let index =index; let odd=odd; let even=even" 
+          [class.odd]="even" 
+          [class.even]="odd">
+          <ion-label>
+            <span *ngIf = "currentLanguage == 'ar'">{{item.CategoryNameAr}}</span>
+            <span *ngIf = "currentLanguage == 'en'">{{item.CategoryNameEn}}</span>
+          </ion-label>
+          <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+        </ion-item>
+      </ion-list> 
+    </ion-list>
+    <ion-list no-lines *ngIf ="ShowItem == 2"> 
+      <ion-list>
+        <ion-item *ngFor="let item of LookUp[0].CusineTag let index =index; let odd=odd; let even=even" 
+          [class.odd]="odd" 
+          [class.even]="even">
+          <ion-label>
+            <span *ngIf = "currentLanguage == 'ar'">{{item.CusineNameAr}}</span>
+            <span *ngIf = "currentLanguage == 'en'">{{item.CusineNameEn}}</span>
+          </ion-label>
+          <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    <ion-list no-lines *ngIf ="ShowItem == 3"> 
+      <ion-list>
+        <ion-item *ngFor="let item of LookUp[0].CookingTypeTag let index =index; let odd=odd; let even=even" 
+          [class.odd]="odd" 
+          [class.even]="even">
+          <ion-label>
+            <span *ngIf = "currentLanguage == 'ar'">{{item.CookingTypeNameAr}}</span>
+            <span *ngIf = "currentLanguage == 'en'">{{item.CookingTypeNameEn}}</span>
+          </ion-label>
+          <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    <button (click)='UpdatePreferences()' ion-button full>{{"Save Preference" | translate}}</button>
+  </div> 
+</ion-content>

@@ -1,0 +1,13 @@
+<ion-list style="height: 255px;overflow: scroll;">
+	<ion-item class="odd">
+		<ion-icon *ngIf="!IsNewCookBookClicked" (click)="AddNewCookBook()" name="add-circle" style="color: lawngreen"></ion-icon>
+		<span (click)="AddNewCookBook()" *ngIf="!IsNewCookBookClicked">Add New Cookbook</span>		
+		<ion-input *ngIf="IsNewCookBookClicked" placeholder="Enter the CokBook" (keyup.enter)="NewCookBookClicked()" [(ngModel)]=NewcookBookName type="text"></ion-input>
+	</ion-item>
+	<ion-item *ngFor="let item of MyCookBook let index =index; let odd=odd; let even=even" 
+      [class.odd]="odd" 
+      [class.even]="even">
+		<ion-label>{{item.CookBookName}}</ion-label>
+		<ion-checkbox (click)="saveMyCookBook(item)" item-right [(ngModel)]=item.IsSelectedForRecipie></ion-checkbox>
+	</ion-item>
+</ion-list>

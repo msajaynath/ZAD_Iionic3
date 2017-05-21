@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"Categories" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color:white">
+  <div *ngFor="let item of Categories2" (click)="CategoryClicked($event, item)" style="display: block;padding: 4%; width: 50%;float: right;position: relative;">
+   
+    <img style="height: 125px;display: block;margin-left: auto; margin-right: auto;" src={{item.CategoryImageUrl}} onerror="this.src='assets/error/noimage.png'">
+    <div class="Category-title" *ngIf = "currentLanguage == 'ar'" style="font-size: 1.5em;text-align: center;">{{item.CategoryNameAr}}</div>
+    <div class="Category-title" *ngIf = "currentLanguage == 'en'" style="font-size: 1.5em;text-align: center;">{{item.CategoryNameEn}}</div>
+  </div>
+  <div *ngFor="let item of Categories1" (click)="CategoryClicked($event, item)" style="display: block;padding: 4%; width: 50%;float: left;position: relative;" >
+    <img style="height: 125px;display: block;margin-left: auto; margin-right: auto;" src={{item.CategoryImageUrl}} onerror="this.src='assets/error/noimage.png'">
+    <div class="Category-title" *ngIf = "currentLanguage == 'ar'" style="font-size: 1.5em;text-align: center;">{{item.CategoryNameAr}}</div>
+    <div class="Category-title" *ngIf = "currentLanguage == 'en'" style="font-size: 1.5em;text-align: center;">{{item.CategoryNameEn}}</div>
+  </div>
+</ion-content>

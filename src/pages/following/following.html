@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"Following" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #f4f6f7"> 
+  <ion-list *ngIf = "LoggedInUserId.length > 0">
+    <div *ngIf = "Followings.length > 0">
+      <ion-item (click)="FollowingProfileClicked($event, item)" *ngFor="let item of Followings let i =index; 
+          let odd=odd; 
+          let even=even" 
+          [class.odd]="odd" 
+          [class.even]="even">
+        <ion-avatar item-left>
+          <img src="{{s3BaseURL+item._id+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+        </ion-avatar>
+        <h2>{{item.FirstName}}</h2>
+        <h3>{{item.JobDescription}}</h3>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-grid *ngIf="Followings.length == 0">
+    <ion-row>
+      <ion-col col-8>
+        <div class="text-center">
+          <img style="text-align: center; width:75px;height:150px" class="imageDisplay" src="assets/loading/empty.png" />
+          <p style="font-family: monospace; text-align: center;font-style:italic;color: grey">You are not following anyone yet....</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

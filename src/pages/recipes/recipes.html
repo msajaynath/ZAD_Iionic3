@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Recipes" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  style="background-color:white;">
+	<div *ngIf="Recipies.length > 0">
+		<ion-card *ngFor="let item of Recipies let index =index;">
+			<div class="card-background-page">
+				<img (click)="itemTapped($event, item)" style="width: 100%;height: 260px;" [src]="GetPrimaryImage(item.Images)">
+				<div class="card-Ingerigent-Icon">
+					<div *ngIf="pageName != 'Profile' || (pageName == 'Profile' && item.MakerId != LoggedInUserId)" (click)="RecipieOwnerClick($event, item.MakerId)">
+						<ion-avatar item-right>
+							<img class="itemProfileHome" src="{{s3BaseURL+item.MakerId+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+						</ion-avatar>
+						<ion-label style="text-align: center;color: white; margin: 0; padding: 2%;">{{item.MakerName}}</ion-label>
+					</div>
+				</div>  
+				<div *ngIf="pageName == 'Profile' && item.MakerId == LoggedInUserId" class="card-Delete-Icon">
+					<div>
+						<ion-icon (click) = "DeleteRecipe(item, index)" style="color: red;font-size: xx-large;" name="close-circle"></ion-icon>
+					</div>
+				</div> 
+				<div *ngIf="pageName == 'CookBook'" style="margin-left: 1%;" class="card-Delete-Icon">
+					<div>
+						<ion-icon (click) = "DeleteRecipeFromCookBook(item, index)" style="color: red;font-size: xx-large;" name="close-circle"></ion-icon>
+					</div>
+				</div> 
+				<div class="card-RecipieDetails-Text">
+					<div (click)="itemTapped($event, item)" class="RecipieDetail">
+						<ion-label>{{item.RecipeName}}</ion-label>
+						<ion-label style="font-style: italic;color: gold;">{{item.RecipeDescription}}</ion-label>
+					</div>
+				</div>
+			</div>
+			<ion-row no-padding>
+				<ion-col text-center width-25>
+					<button (click)="presentPopover(item.Id)" ion-button clear small color="danger" icon-left>
+					  <ion-icon name="heart"></ion-icon>
+					</button>
+				</ion-col>
+				<ion-col text-center width-25>
+					<button ion-button clear small color="danger" icon-left>
+						<ion-icon ios="ios-time" md="md-time"></ion-icon>
+						{{item.Time}} Min
+					</button>
+				</ion-col>
+				<ion-col text-center width-25>
+					<button ion-button clear small color="danger" (click)="presentShareActionSheet(item)" icon-left>
+						<ion-icon name='share-alt'></ion-icon>
+					</button>
+				</ion-col>
+				<ion-col text-center width-25>
+									<ion-icon style="color: red;margin-top: 7%" *ngIf="item.Liked" name='thumbs-up'></ion-icon>
+											<ion-icon style="margin-top: 7%" *ngIf="!item.Liked" name='ios-thumbs-up-outline' (click)="LikeRecipie(item, item.Id)"></ion-icon>
+
+						<div style="font-size: x-small;">{{item.TotalLikes}}</div>
+				</ion-col>
+			</ion-row>
+		</ion-card>
+	</div>	
+	<ion-grid *ngIf="Recipies.length == 0 && !IsLoading">
+		<ion-row>
+			<ion-col col-12>
+				<div class="text-center">
+					<img style="text-align: center; width:75px;height:150px" class="imageDisplay" src="assets/loading/empty.png" />
+					<p style="font-family: monospace; text-align: center;font-style:italic;color: grey">No recipes found......</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

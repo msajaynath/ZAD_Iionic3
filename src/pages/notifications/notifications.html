@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Notifications</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #f4f6f7">
+  <ion-list>
+    <ion-item-sliding *ngFor="let data of Notifications let index =index; let odd=odd; let even=even" [class.odd]="odd" [class.even]="even"
+      #item>
+      <ion-item text-wrap [class.odd]="odd" [class.even]="even">
+        <ion-avatar item-left>
+          <img style="width: 60px;height: 60px;" src="{{s3BaseURL+data.userId+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+        </ion-avatar>
+        <div style="display: -webkit-inline-box;">
+          <b (click) = "ViewProfile(data.userId)">{{data.userName}}</b> <span>{{data.CategoryText}}</span> <b *ngIf="data.category != 4" (click) = "ViewRecipe(data.recipeId)">{{data.recipeName}}</b>
+        </div>
+        <div style="display: -webkit-inline-box;">
+          {{data.date | amTimeAgo}}
+        </div>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="DeleteNotification(data, index)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title *ngIf="PageTitle != 'EditProfile'">{{"Create Profile" | translate}}</ion-title>
+		<ion-title *ngIf="PageTitle == 'EditProfile'">{{"Edit Profile" | translate}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: oldlace">
+	<div style="padding: 3%" *ngIf="createConfirm.length > 0">
+		<ion-item *ngIf="PageTitle == 'EditProfile'">
+			<div style="background-color: #47455b;border-radius: 23px;background:url('assets/Profile/Prof.jpg');color: gold;font-family:Times New Roman;padding: 10%"><br />
+				<img class="item-profile" src="{{s3BaseURL+UserInfo.id+'.jpeg'}}" (click)='ChangeImage()' onerror="this.src='assets/Profile/cheff.png'">
+			         <!--<ion-icon class="editIcon" *ngIf="!IsViewOtherProfile" (click)='ChangeImage()' name="ios-create"></ion-icon>-->
+
+				<!--<i  style="color: mistyrose;font-size: 21px; float: right" class="fa fa-pencil-square-o"
+					aria-hidden="true"></i>-->
+					<br />
+			</div>
+		</ion-item>
+		<ion-item style="margin-top: 10px;" no-lines>
+			<ion-input [(ngModel)]="createProfile.Name" placeholder="{{'Name' | translate}}" clearInput></ion-input>
+		</ion-item>
+		<ion-item style="margin-top: 10px;" no-lines>
+			<ion-input [(ngModel)]="createProfile.JobDescription" placeholder="{{'Occupation' | translate}}" clearInput></ion-input>
+		</ion-item>
+		<ion-item *ngIf="PageTitle != 'EditProfile'" style="margin-top: 10px;" no-lines>
+			<ion-input type="email"  [(ngModel)]="createProfile.Email" (blur) = "CheckEmailUnique(createProfile.Email)" placeholder="{{'Email' | translate}}" clearInput></ion-input>
+		</ion-item>
+		<ion-item *ngIf="PageTitle == 'EditProfile'" style="margin-top: 10px;" no-lines>
+			<ion-input type="tel"  [(ngModel)]="createProfile.PhoneNumber" placeholder="{{'Mobile' | translate}}" clearInput></ion-input>
+		</ion-item>
+		<ion-item *ngIf="PageTitle != 'EditProfile'" style="margin-top: 10px;" no-lines>
+			<ion-input type="password" [(ngModel)]="createProfile.Password" placeholder="Password" clearInput></ion-input>
+		</ion-item>
+		<ion-item *ngIf="PageTitle != 'EditProfile'" style="margin-top: 10px;" no-lines>
+			<ion-input type="password" [(ngModel)]="createProfile.ConfirmPassword" placeholder="COnfirm Password" clearInput></ion-input>
+		</ion-item>
+		<ion-item *ngIf="!islanguageSet" style="margin-top: 10px;" no-lines>
+			<ion-label>Language</ion-label>
+			<ion-select [(ngModel)]="createProfile.Language" cancelText="Cancel" okText="Okay!">
+				<ion-option *ngFor="let item of Languages" value={{item.LanguageId}}>{{item.LanguageName}}</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-card style="width: 100%; margin: 10px 10px 10px 0px;">
+			<ion-card-content>
+				<button (click)='SaveProfile()' ion-button full>Save</button>
+			</ion-card-content>
+		</ion-card>
+	</div>
+</ion-content>

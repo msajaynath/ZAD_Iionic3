@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"Search" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="SelectedList.length > 0">
+    <ion-grid style="margin-top: 27px;">
+      <ion-row>
+        <ion-col style="background-color: lavender" width-25>
+          <ion-row style="height: 20%">
+            <ion-col style="height: 20%" (click)="SearchItemClick('Time')">
+           <ion-icon name="clock" class="imageDisplay"></ion-icon>
+
+              <!--<ion-img class="imageDisplay" src="assets/search/time.png"></ion-img>-->
+              <ion-label style="text-align: center">{{"Time" | translate}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="height: 20%">
+            <ion-col style="height: 20%" (click)="SearchItemClick('Calories')">
+              <ion-icon class="imageDisplay"  name="nutrition" ></ion-icon>
+              <ion-label style="text-align: center">{{"Calories" | translate}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="height: 20%">
+            <ion-col style="height: 20%" (click)="SearchItemClick('Cusine')">
+              <ion-icon class="imageDisplay"  name="bowtie" ></ion-icon>
+
+              <ion-label style="text-align: center">{{"Cusine" | translate}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="height: 20%">
+            <ion-col style="height: 20%" (click)="SearchItemClick('Categories')">
+              <ion-icon class="imageDisplay"  name="bookmarks" ></ion-icon>
+              <ion-label style="text-align: center">{{"Categories" | translate}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row style="height: 20%">
+            <ion-col style="height: 20%" (click)="SearchItemClick('Cooking Type')">
+              <ion-icon class="imageDisplay"  name="bonfire" ></ion-icon>
+              <ion-label style="text-align: center">{{"Cooking type" | translate}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col width-75>  
+          <div style="height: 100%;overflow-y: auto;">
+            <ion-list *ngIf="SelectedList == 'Categories'">
+              <ion-list-header style="text-align: center">
+                {{SelectedList | translate}}
+              </ion-list-header> 
+              <ion-item *ngFor="let item of LookUp[0].CategoryTag let index =index; let odd=odd; let even=even" 
+                [class.odd]="odd" 
+                [class.even]="even">
+                <ion-label>
+                  <span *ngIf = "currentLanguage == 'ar'">{{item.CategoryNameAr}}</span>
+                  <span *ngIf = "currentLanguage == 'en'">{{item.CategoryNameEn}}</span>
+                </ion-label>
+                <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+
+            <ion-list *ngIf="SelectedList == 'Cusine'">
+              <ion-list-header style="text-align: center">
+                {{SelectedList | translate}}
+              </ion-list-header> 
+              <ion-item *ngFor="let item of LookUp[0].CusineTag; let odd=odd; let even=even" 
+                [class.odd]="odd" 
+                [class.even]="even">
+                <ion-label>
+                  <span *ngIf = "currentLanguage == 'ar'">{{item.CusineNameAr}}</span>
+                  <span *ngIf = "currentLanguage == 'en'">{{item.CusineNameEn}}</span>
+                </ion-label>
+                <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+              </ion-item>
+            </ion-list>
+
+            <ion-list *ngIf="SelectedList == 'Cooking Type' ">
+              <ion-list-header style="text-align: center">
+                {{SelectedList | translate}}
+              </ion-list-header> 
+              <ion-item *ngFor="let item of LookUp[0].CookingTypeTag; let odd=odd; let even=even" 
+                [class.odd]="odd" 
+                [class.even]="even">
+                <ion-label>
+                  <span *ngIf = "currentLanguage == 'ar'">{{item.CookingTypeNameAr}}</span>
+                  <span *ngIf = "currentLanguage == 'en'">{{item.CookingTypeNameEn}}</span>
+                </ion-label>
+                <ion-checkbox [(ngModel)]=item.IsSelected></ion-checkbox>
+              </ion-item>
+            </ion-list>
+
+            <ion-list *ngIf="SelectedList == 'Time'" radio-group [(ngModel)]="SelectedTime">
+              <ion-list-header style="text-align: center">
+                {{SelectedList | translate}}
+              </ion-list-header>
+
+              <ion-item *ngFor="let item of LookUp[0].Time; let odd=odd; let even=even" 
+                [class.odd]="odd" 
+                [class.even]="even">
+                <ion-radio value={{item._id}}></ion-radio>
+                <ion-label>
+                  <span *ngIf = "currentLanguage == 'ar'">{{item.CookingTimeAr}}</span>
+                  <span *ngIf = "currentLanguage == 'en'">{{item.CookingTimeEn}}</span>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-list *ngIf="SelectedList == 'Calories'" radio-group [(ngModel)]="SelectedCalories ">
+              <ion-list-header style="text-align: center">
+                {{SelectedList | translate}}
+              </ion-list-header>
+
+              <ion-item *ngFor="let item of LookUp[0].Calories; let odd=odd; let even=even" 
+                [class.odd]="odd" 
+                [class.even]="even">
+                <ion-radio value={{item._id}}></ion-radio>
+                <ion-label>
+                  <span *ngIf = "currentLanguage == 'ar'">{{item.CaloriesNameAr}}</span>
+                  <span *ngIf = "currentLanguage == 'en'">{{item.CaloriesNameEn}}</span>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div> 
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div style="width: 100%">
+          <button style="width: 46%" (click)="RefineSearchSave()" ion-button color="danger">{{"Search" | translate}}</button>
+          <button style="width: 46%" ion-button>{{"Cancel" | translate}}</button>
+        </div>
+      </ion-row>
+    </ion-grid>    
+  </div> 
+</ion-content>

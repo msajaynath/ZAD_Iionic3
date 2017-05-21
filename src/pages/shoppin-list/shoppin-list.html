@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"Shopping List" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <img style="height: 140px;width: 97%;margin-left: 5px;" src="assets/shopping/image.jpg"/>
+  <div *ngIf="shoppingList.length > 0">
+    <div  radio-group [(ngModel)]="selectedGroup" style="background-color: darkkhaki; padding: 3%; height: 75px;margin-left: 5px; margin-right: 5px;">
+      <div style="display: block;float: left;width: 50%;">
+        <ion-label style="width: 60%;float: left;">By Categories</ion-label>
+        <ion-radio value="Categories" style="margin-top: 14px;" (click)="SelectGroup('Categories')"></ion-radio>
+      </div>
+      <div style="display: block;float: right;width: 50%;">
+        <ion-label style="width: 60%;float: left;">By Recipes</ion-label>
+        <ion-radio value="Recipes" style="margin-top: 14px;" (click)="SelectGroup('Recipes')"></ion-radio>
+      </div>
+    </div>
+    <div *ngIf="selectedGroup == 'Categories'">
+      <ion-item-group style = "margin-left: 5px; margin-right: 5px;" *ngFor="let item of ShoppingListAsCategory let ind =index;" color="light">      
+        <div style = "margin-top: 5px; margin-bottom: 5px;" class="Rib">{{item.ShoppingListCategoryName}}</div>
+        <ion-item *ngFor="let ing of item.ShoppingListIngredentInfo let index =index; 
+          let odd=odd; let even=even" 
+          [class.odd]="odd" 
+          [class.even]="even">      
+          <div style="width: 90%;display: block; float: left;">{{ing.recipeIngredentName}}</div>
+          <ion-icon (click)="removeIngredent(item.Id)" name="remove-circle"></ion-icon>
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <div *ngIf="selectedGroup == 'Recipes'">
+      <ion-item-group style = "margin-left: 5px; margin-right: 5px;" *ngFor="let item of ShoppingListAsRecipe let ind =index;" color="light">      
+        <div (click)="GetRecipeDetails(item.RecipeId)" style = "margin-top: 5px; margin-bottom: 5px;" class="RibbonRecipe">
+          <div style="display: block;width: 40%;float: left;"><img style="height: 60px;width: 50px; margin: 5px;" src="{{item.RecipeImageUrl}}"></div>
+          <div style="width: 60%;float: right;padding-top: 6px;"><ion-label>{{item.RecipeName}}</ion-label></div>
+        </div>
+        <ion-item *ngFor="let ing of item.ShoppingListIngredentInfo let index =index; 
+          let odd=odd; let even=even" 
+          [class.odd]="odd" 
+          [class.even]="even">      
+          <div style="width: 90%;display: block; float: left;">{{ing.recipeIngredentName}}</div>
+          <ion-icon (click)="removeIngredent(item.Id)" name="remove-circle"></ion-icon>
+        </ion-item>
+      </ion-item-group>
+    </div>   
+  </div> 
+  <ion-grid *ngIf="shoppingList.length == 0">
+		<ion-row>
+			<ion-col col-12>
+				<div class="text-center">
+					<img style="text-align: center; width:75px;height:150px" class="imageDisplay" src="assets/loading/empty.png" />
+					<p style="font-family: monospace; text-align: center;font-style:italic;color: grey">No ingredents added to shopping cart......</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

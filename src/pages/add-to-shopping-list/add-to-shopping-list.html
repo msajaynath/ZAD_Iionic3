@@ -1,0 +1,21 @@
+<ion-list style="height: 255px;overflow: scroll;">
+	<ion-item class="odd">
+		<ion-icon *ngIf="!IsNewIngredentCategoryClicked" (click)="AddNewShoppingListCategory()" name="add-circle" style="color: lawngreen"></ion-icon>
+		<span (click)="AddNewShoppingListCategory()" *ngIf="!IsNewIngredentCategoryClicked">Add New Category</span>		
+		<ion-input *ngIf="IsNewIngredentCategoryClicked" placeholder="Enter the Category" (keyup.enter)="NewShoppingListClicked()" [(ngModel)]=NewShoppingListCategoryName type="text"></ion-input>
+	</ion-item>
+	<ion-item *ngFor="let item of UserShoppingList let index =index; let odd=odd; let even=even" 
+      [class.odd]="odd" 
+      [class.even]="even">
+		<ion-label *ngIf="currentLanguage == 'ar'">{{item.ShoppingListCategoryNameAr}}</ion-label>
+		<ion-label *ngIf="currentLanguage == 'en'">{{item.ShoppingListCategoryNameEn}}</ion-label>
+		<ion-radio (click)="saveMyShoppingList(item)" item-right></ion-radio>
+	</ion-item>
+	<ion-item *ngFor="let item of ShoppingCart let index =index; let odd=odd; let even=even" 
+      [class.odd]="odd" 
+      [class.even]="even">
+		<ion-label *ngIf="currentLanguage == 'ar'">{{item.ShoppingListCategoryNameAr}}</ion-label>
+		<ion-label *ngIf="currentLanguage == 'en'">{{item.ShoppingListCategoryNameEn}}</ion-label>
+		<ion-radio (click)="saveMyShoppingList(item)" item-right></ion-radio>
+	</ion-item>
+</ion-list>

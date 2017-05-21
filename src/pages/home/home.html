@@ -1,0 +1,92 @@
+<ion-header no-border>
+	<ion-toolbar>
+		<button ion-button icon-only menuToggle *ngIf="!IsSearchClicked">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+		<ion-title *ngIf="!IsSearchClicked">ZaD</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="SearchClick()" *ngIf="!IsSearchClicked && pageName != 'Categories' && pageName != 'Profile' && pageName != 'CookBook'">
+					<ion-icon name="search" ></ion-icon>
+				</button>
+			<button ion-button icon-only *ngIf="IsSearchClicked" (click)="onCancel()">
+  <ion-icon name="arrow-round-back" ></ion-icon>
+    </button>
+
+		</ion-buttons>
+		<ion-searchbar *ngIf="IsSearchClicked" (search)="onSearchInput($event)" style="float:left;" [showCancelButton]="shouldShowCancel"
+			(ionCancel)="onCancel()"></ion-searchbar>
+
+	</ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color:white;">
+	<ion-fab bottom right class="fabBottom">
+		<button ion-fab mini (click)="RefineSearchPopover()">   <ion-icon name="ios-funnel"></ion-icon>
+
+</button>
+	</ion-fab>
+	<div *ngIf="Recipies.length > 0">
+		<ion-card *ngFor="let item of Recipies">
+			<div class="card-background-page">
+				<img (click)="itemTapped($event, item)" style="width: 100%;height: 260px;" [src]="GetPrimaryImage(item.Images)">
+				<div *ngIf="showRibbon" class="card-Ribbon-Icon">
+					<div class="Rib">{{item.RecipeTag}}</div>
+				</div>
+				<div class="card-Ingerigent-Icon">
+					<div (click)="RecipieOwnerClick($event, item.MakerId)">
+						<ion-avatar item-right>
+							<img class="itemProfileHome" src="{{s3BaseURL+item.MakerId+'.jpeg'}}" onerror="this.src='assets/Profile/cheff.png'">
+						</ion-avatar>
+						<ion-label style="text-align: center;color: white; margin: 0; padding: 2%;">{{item.MakerName}}</ion-label>
+					</div>
+				</div>
+				<div class="card-RecipieDetails-Text">
+					<div (click)="itemTapped($event, item)" class="RecipieDetail">
+						<ion-label>{{item.RecipeName}}</ion-label>
+						<ion-label style="font-style: italic;color: gold;">{{item.RecipeDescription}}</ion-label>
+					</div>
+				</div>
+			</div>
+			<ion-row no-padding>
+				<ion-col text-center width-25>
+					<button (click)="presentPopover(item.Id)" ion-button clear small color="danger" icon-left>
+					  <ion-icon name="heart"></ion-icon>
+
+						<!--<img style="height: 75%;width: 50%;" src="assets/MainMenuImage/Cooking.png">-->
+					</button>
+				</ion-col>
+				<ion-col text-center width-25>
+					<button ion-button clear small color="danger" icon-left>
+						<ion-icon ios="ios-time" md="md-time"></ion-icon>
+						{{item.Time}} Min
+					</button>
+				</ion-col>
+				<ion-col text-center width-25>
+					<button ion-button clear small color="danger" (click)="presentShareActionSheet(item)" icon-left>
+						<ion-icon name='share-alt'></ion-icon>
+					</button>
+				</ion-col>
+				<ion-col text-center width-25>
+
+											<ion-icon style="color: red;margin-top: 7%" *ngIf="item.Liked" name='thumbs-up'></ion-icon>
+											<ion-icon style="margin-top: 7%" *ngIf="!item.Liked" name='ios-thumbs-up-outline' (click)="LikeRecipie(item, item.Id)"></ion-icon>
+
+						<div style="font-size: x-small;">{{item.TotalLikes}}</div>
+				</ion-col>
+			</ion-row>
+		</ion-card>
+		
+	</div>
+<div class="emptyDiv"></div>
+	<ion-grid *ngIf="Recipies.length == 0 && !IsLoading">
+		<ion-row>
+			<ion-col col-12>
+				<div class="text-center">
+					<img style="text-align: center; width:75px;height:150px" class="imageDisplay" src="assets/loading/empty.png" />
+					<p style="font-family: monospace; text-align: center;font-style:italic;color: grey">No recipes found......</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

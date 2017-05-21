@@ -1,0 +1,100 @@
+.card-background-page {
+    position: relative;  
+}
+
+.card-Ingerigent-Text {
+    position: absolute;
+    top: 69%;
+    font: 14px Sans-Serif;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    height: 31%;
+}
+
+.card-minutes {
+    position: absolute;
+    top: 80%;
+     font: 14px Sans-Serif;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 2%
+}
+
+.ListHeading{
+    font-weight: bold;
+    color:black;
+}
+
+.AddAllIngredent{
+    background-color: #e1e5e8;
+}
+
+.odd {
+    background-color: #e1e5e8;
+}
+.even {
+    background-color: #f4f6f7;
+}
+
+ul {
+
+  &.rating li {
+    padding: 5px 2px !important;
+
+    ion-icon {
+      font-size: 15px;
+    }
+  }
+}
+
+
+
+.my-nav {
+  list-style-type: disc;
+}
+
+.hideContent {
+    overflow: hidden;
+    height: 20em;
+}
+
+.showContent {
+    height: auto;
+}
+
+.item-profileRecipie {
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    height: 32%;
+    width: 100%;
+    /* margin-top: 12%; */
+    margin-left: 22%;
+}
+
+ion-scroll {
+    white-space: nowrap;
+    height: 100px;
+}
+
+.RatingText {
+    position: absolute;
+    top: 0%;
+    font: 14px Sans-Serif;
+    width: 42%;
+    /* background: rgba(0, 0, 0, 0.35); */
+    color: #fff;
+    height: 10%;
+    text-align: center;
+    margin-left: 57%;
+}
+
+.RecipieDetailsText {
+    width: 50%;
+    display: block;
+    float: left;
+    margin-top: 6%;
+    padding-left: 3%;
+}

@@ -1,0 +1,85 @@
+<ion-slides *ngIf="aCategory.length > 0" pager>
+  <ion-slide style="background-color: #7D62B4;padding: 3%;">
+    <a (click)="SavePreference()" class="textPreferWhite" style="text-align: right;float: right;margin-top: -47%;">{{"SkipPreference" | translate}}</a>
+    <h2 class="textPreferWhite">{{"Welcome" | translate}}</h2>
+    <p class="textPreferWhite">{{"SubText" | translate}}</p>
+    <p class="textPreferWhite">{{"TourText" | translate}}</p>
+      <ion-icon style="font-size: 110px;color: white" name="bicycle"></ion-icon>
+
+  </ion-slide>
+
+  <ion-slide style="background-color: #7D32A4;padding: 3%;">
+  <ion-icon style="font-size: 100px;color: white" name="quote"></ion-icon>
+
+    <h4 class="textPreferWhite">Choose language</h4>
+    <button ion-button (click)="setLanguage('en')"  round color="secondary">English</button>
+    <button ion-button  (click)="setLanguage('ar')" round>Arabic</button>
+
+    
+
+  </ion-slide>
+
+  <ion-slide style="background-color: #ebbe48;padding: 3%;">
+      <ion-icon style="font-size: 150px;color: white" name="restaurant"></ion-icon>
+
+    <h3 class="textPreferWhite">{{"CategorySelect" | translate}}</h3>
+    <ion-list>
+      <ion-item *ngFor="let item of LookUp[0].CategoryTag let index =index; let oddd=odd; let evenn=even" 
+        [class.oddd]="oddd" 
+        [class.evenn]="evenn">
+        <ion-label>
+          <span class="textPreferWhite" *ngIf = "currentLanguage == 'ar'">{{item.CategoryNameAr}}</span>
+          <span class="textPreferWhite" *ngIf = "currentLanguage == 'en'">{{item.CategoryNameEn}}</span>
+        </ion-label>
+        <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide style="background-color: #5c83f6;padding: 3%;">
+          <ion-icon style="font-size: 70px;color: white" name="beer"></ion-icon>
+
+    <h4 class="textPreferWhite">{{"CUsineSelect" | translate}}</h4>
+    <ion-list>
+      <ion-item *ngFor="let item of LookUp[0].CusineTag let index =index; let oddd2=odd; let evenn2=even" 
+        [class.oddd2]="oddd2" 
+        [class.evenn2]="evenn2">
+        <ion-label>
+          <span class="textPreferWhite" *ngIf = "currentLanguage == 'ar'">{{item.CusineNameAr}}</span>
+          <span  class="textPreferWhite" *ngIf = "currentLanguage == 'en'">{{item.CusineNameEn}}</span>
+        </ion-label>
+        <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-slide>
+
+  <ion-slide style="background-color: #aa5378 ;padding: 3%;">
+              <ion-icon style="font-size: 70px;color: white" name="ios-bonfire"></ion-icon>
+
+    <h4 class="textPreferWhite">{{"CookingTypeSelect" | translate}}</h4>
+    <ion-list>
+      <ion-item *ngFor="let item of LookUp[0].CookingTypeTag let index =index;let oddd3=odd; let evenn3=even" 
+        [class.oddd3]="oddd3" 
+        [class.evenn3]="evenn3">
+        <ion-label>
+          <span class="textPreferWhite" *ngIf = "currentLanguage == 'ar'">{{item.CookingTypeNameAr}}</span>
+          <span  class="textPreferWhite" *ngIf = "currentLanguage == 'en'">{{item.CookingTypeNameEn}}</span>
+        </ion-label>
+        <ion-checkbox [(ngModel)]="item.IsSelected"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-slide>
+  <ion-slide style="background-color:#9eb2e7">
+              <ion-icon style="font-size: 100px;color: white" name="flag"></ion-icon>
+
+    <h3 class="textPreferWhite" >{{"EndPage" | translate}}</h3>
+    <p class="textPreferWhite" >{{"EndSubText" | translate}}</p>
+        <button (click)="SavePreference()" ion-button outline   round>Let's cook</button>
+
+    <!--<div id="container" style="background-color: wheat" align="center">
+      <button (click)="SavePreference()" class="big-button">
+        {{"EndFinalText" | translate}}
+      </button>
+   </div>-->
+  </ion-slide>
+</ion-slides>

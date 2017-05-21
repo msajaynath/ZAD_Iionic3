@@ -1,0 +1,136 @@
+.card-background-page {
+    position: relative;  
+    
+}
+.fabBottom
+{
+   // margin-bottom: 30px;
+}
+.card-Ingerigent-TextHome {
+    padding: 3%;
+    position: absolute;
+    top: 75%;
+    font: 14px Sans-Serif;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    height: 25%;
+}
+.emptyDiv
+{
+height: 10%;
+}
+
+.card-Ingerigent-Icon {
+    position: absolute;
+    top: 2%;
+    font: 14px Sans-Serif;
+    width: 25%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    height: auto;
+    text-align: center;
+    margin-left: 70%;
+}
+
+.card-Ribbon-Icon {
+    position: absolute;
+    top: 2%;
+    font: 14px Sans-Serif;
+    width: auto;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    height: auto;
+    text-align: center;
+    margin-left: 2%;
+}
+
+ion-grid {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.RecipieName{
+    font-size: 16px;
+    color: White;
+}
+
+.vertical-align-content > *
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+}
+
+.RecipieDetail{
+    width: 100%;
+    display: block;
+    float: left;
+    padding-left: 3%;
+}
+
+.toolbar-background {
+  background-color: lightgray;
+}
+
+.MakerImage{
+    border-radius: 50%;
+    display: block;
+    height: 28%;
+    width: 57%;
+    margin-top: 7%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-RecipieDetails-Text{
+    position: absolute;
+    top: 73%;
+    font: 14px Sans-Serif;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    height: 27%;
+}
+
+.itemProfileHome{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px !important;
+}
+
+
+.Rib{
+    height: 30px;
+    background: yellowgreen;
+    color: #fff;
+    position: relative;
+    width: 133px;
+    text-align: center;
+    line-height: 32px;
+}
+.Rib:after{
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    left: 100%;
+    top: 0;
+    border: 15px dotted transparent;
+    border-left: 20px dotted yellowgreen;
+}
+
+.card-Delete-Icon{
+    position: absolute;
+    top: 2%;
+    font: 14px Sans-Serif;
+    width: 10%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    height: auto;
+    text-align: center;
+    margin-left: 85%;
+}
