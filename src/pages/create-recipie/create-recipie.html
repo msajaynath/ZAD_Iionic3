@@ -119,7 +119,9 @@
         <ion-card style="margin: 10px 10px 10px 0px;width: 100%">
           <ion-card-header style="background-color:khaki">{{"Photos" | translate}}
             <ion-icon class="circleadddd" *ngIf="imageProgress==false" name="add-circle" (click)="presentActionSheet()"></ion-icon>
-            <ion-icon class="circleadddd fa fa-spinner fa-spin" *ngIf="imageProgress==true"></ion-icon>
+            <!--<ion-icon class="circleadddd fa fa-spinner fa-spin" *ngIf="imageProgress==true"></ion-icon>-->
+          <ion-spinner name="bubbles"  *ngIf="imageProgress==true"></ion-spinner>
+
             <!--<div class="fa fa-spinner fa-spin"></div>-->
 
           </ion-card-header>
@@ -129,9 +131,9 @@
               <ion-col *ngFor="let item of createRecipie.Images ; let i = index" width-50 height-50>
                 <div class="img-wrap">
 
-                  <i class="clearButton fa fa-times-circle fa-2x" *ngIf="item.Order!=0" aria-hidden="true" (click)="deleteImage(item)"></i>
-                  <i class="primaryButton fa fa-check-circle fa-2x primaryCheck" aria-hidden="true" *ngIf="item.Order==0"></i>
-                  <i class="primaryButton fa fa-check-circle fa-2x" aria-hidden="true" *ngIf="item.Order>0" (click)="changePrimary(item)"></i>
+                  <ion-icon class="clearButton" name="ios-trash"   (click)="deleteImage(item)"></ion-icon>
+                  <ion-icon class="primaryButton  primaryCheck" name="ios-checkmark-circle"  aria-hidden="true" *ngIf="item.Order==0"></ion-icon>
+                  <ion-icon class="primaryButton" name="ios-checkmark-circle"  aria-hidden="true" *ngIf="item.Order>0" (click)="changePrimary(item)"></ion-icon>
                   <img src={{item.URL}} imageViewer />
                 </div>
               </ion-col>
@@ -141,7 +143,9 @@
         <ion-card style="margin: 0px 5px 10px 1px;width: 100%">
           <ion-card-header style="background-color:khaki">{{"Videos" | translate}}
             <ion-icon class="circleadddd" name="add-circle" *ngIf="videoProgress==false" (click)="presentVideoActionSheet()"></ion-icon>
-            <ion-icon class="circleadddd fa fa-spinner fa-spin" *ngIf="videoProgress==true"></ion-icon>
+           <ion-spinner name="bubbles"  *ngIf="videoProgress==true"></ion-spinner>
+
+            <!--<ion-icon class="circleadddd fa fa-spinner fa-spin"></ion-icon>-->
 
           </ion-card-header>
           <ion-card-content>
@@ -149,8 +153,8 @@
             <ion-row wrap>
               <ion-col *ngFor="let item of createRecipie.Videos" width-50 height-80>
                 <div class="img-wrap">
+                  <ion-icon class="clearVideoButton" name="ios-trash" (click)="deleteVideo(item)"></ion-icon>
 
-                  <i class="clearVideoButton fa fa-times-circle fa-2x" aria-hidden="true" (click)="deleteVideo(item)"></i>
 
                   <video width="150px" height="150px" controls>
                     <source src={{item.URL}} type="{{item.Type}}">

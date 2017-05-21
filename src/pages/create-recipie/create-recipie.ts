@@ -61,7 +61,12 @@ export class CreateRecipiePage {
     this.commonServices.GetKey().then((keyData: any) => {
     this.awsKey=keyData.key;
     this.awsSecret=keyData.secret;
-    });
+  });
+  
+        // this.createRecipie.Images.push({ URL: "https://s3.ap-south-1.amazonaws.com/zadapp/recipiesImages/zad_570.jpeg", Order: 0, Type: "jpeg" });
+        // this.createRecipie.Images.push({ URL: "https://s3.ap-south-1.amazonaws.com/zadapp/recipiesImages/zad_361.jpeg", Order: 1, Type: "jpeg" });
+        // this.createRecipie.Images.push({ URL: "https://s3.ap-south-1.amazonaws.com/zadapp/recipiesImages/zad_467.jpeg", Order: 2, Type: "jpeg" });
+        // this.createRecipie.Images.push({ URL: "https://s3.ap-south-1.amazonaws.com/zadapp/recipiesImages/zad_467.jpeg", Order: 2, Type: "jpeg" });
 
     this.selectedSegment = 'first';
     this.slides = [
